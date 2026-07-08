@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOARBAUR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--deep-brown:#2C1A10;--warm-brown:#4A3028;--champagne-gold:#C9A96E;--pale-gold:#D4B886;--ivory:#F5F0E8;--warm-cream:#EDE5D8;--stone:#D4C9B5;--text-dark:#1A0E08;--text-soft:#6B5D50;--ease-out-expo:cubic-bezier(0.16,1,0.3,1);--nav-height:5rem}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background-color:var(--ivory);color:var(--text-dark);line-height:1.7;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.container{max-width:1280px;margin:0 auto;padding:0 2rem}
+@media(max-width:768px){.container{padding:0 1.25rem}}
+.reveal{opacity:0;transform:translateY(2.5rem);transition:opacity 0.9s var(--ease-out-expo),transform 0.9s var(--ease-out-expo)}
+.reveal.revealed{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.1s}.reveal-delay-2{transition-delay:0.2s}.reveal-delay-3{transition-delay:0.3s}.reveal-delay-4{transition-delay:0.4s}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-height);display:flex;align-items:center;justify-content:center;padding:0 2rem;transition:background-color 0.5s var(--ease-out-expo),box-shadow 0.5s var(--ease-out-expo);background:transparent}
+.nav.scrolled{background:rgba(28,10,5,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(201,169,110,0.12)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1280px}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:0.8125rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--ivory);transition:color 0.3s ease;position:relative}
+.nav-links a::after{content:"";position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--champagne-gold);transition:width 0.35s var(--ease-out-expo)}
+.nav-links a:hover{color:var(--champagne-gold)}
+.nav-links a:hover::after{width:100%}
+.nav-logo{position:absolute;left:50%;transform:translateX(-50%);font-family:"Playfair Display",serif;font-size:1.625rem;font-weight:700;letter-spacing:0.3em;color:var(--ivory);transition:color 0.5s ease}
+@media(max-width:768px){.nav-links.left-links{display:none}.nav-links.right-links{display:none}.nav-links{gap:1rem}}
+
+</style>
+</head>
+<body>
+
+<nav class="nav" id="navbar">
+  <div class="nav-inner">
+    <ul class="nav-links left-links">
+      <li><a href="white.html">HB001 白</a></li>
+      <li><a href="black.html">HB001 黑</a></li>
+    </ul>
+    <a href="index.html" class="nav-logo">HOARBAUR</a>
+    <ul class="nav-links right-links">
+      <li><a href="contact.html">联系方式</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="detail-section white-detail" id="contact" style="padding-top:8rem">
+  <div class="container" style="text-align:center">
+    <a href="index.html" class="detail-back">返回主页</a>
+    <div class="section-header reveal">
+      <p class="section-tag">联系我们</p>
+      <h2 class="section-title">期待您的来电</h2>
+      <span class="section-line"></span>
+    </div>
+    <p style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--deep-brown);margin-top:1rem">17151111122</p>
+  </div>
+</section>
+
+
+<script>
+const navbar=document.getElementById('navbar');
+function updateNav(){navbar.classList.toggle('scrolled',window.scrollY>100)}
+window.addEventListener('scroll',updateNav,{passive:true});updateNav();
+</script>
+
+<script>
+const revealEls=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('revealed');obs.unobserve(e.target)}})},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+revealEls.forEach(el=>obs.observe(el));
+</script>
+
+</body>
+</html>

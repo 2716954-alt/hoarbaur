@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOARBAUR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--deep-brown:#2C1A10;--warm-brown:#4A3028;--champagne-gold:#C9A96E;--pale-gold:#D4B886;--ivory:#F5F0E8;--warm-cream:#EDE5D8;--stone:#D4C9B5;--text-dark:#1A0E08;--text-soft:#6B5D50;--ease-out-expo:cubic-bezier(0.16,1,0.3,1);--nav-height:5rem}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background-color:var(--ivory);color:var(--text-dark);line-height:1.7;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.container{max-width:1280px;margin:0 auto;padding:0 2rem}
+@media(max-width:768px){.container{padding:0 1.25rem}}
+.reveal{opacity:0;transform:translateY(2.5rem);transition:opacity 0.9s var(--ease-out-expo),transform 0.9s var(--ease-out-expo)}
+.reveal.revealed{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.1s}.reveal-delay-2{transition-delay:0.2s}.reveal-delay-3{transition-delay:0.3s}.reveal-delay-4{transition-delay:0.4s}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-height);display:flex;align-items:center;justify-content:center;padding:0 2rem;transition:background-color 0.5s var(--ease-out-expo),box-shadow 0.5s var(--ease-out-expo);background:transparent}
+.nav.scrolled{background:rgba(28,10,5,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(201,169,110,0.12)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1280px}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:0.8125rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--ivory);transition:color 0.3s ease;position:relative}
+.nav-links a::after{content:"";position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--champagne-gold);transition:width 0.35s var(--ease-out-expo)}
+.nav-links a:hover{color:var(--champagne-gold)}
+.nav-links a:hover::after{width:100%}
+.nav-logo{position:absolute;left:50%;transform:translateX(-50%);font-family:"Playfair Display",serif;font-size:1.625rem;font-weight:700;letter-spacing:0.3em;color:var(--ivory);transition:color 0.5s ease}
+@media(max-width:768px){.nav-links.left-links{display:none}.nav-links.right-links{display:none}.nav-links{gap:1rem}}
+
+.detail-section{padding:7rem 0;background:var(--warm-cream);position:relative}
+.detail-section.white-detail{background:var(--ivory)}
+.detail-back{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.75rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--champagne-gold);margin-bottom:2.5rem;transition:color 0.3s ease;cursor:pointer}
+.detail-back:hover{color:var(--deep-brown)}
+.detail-back::before{content:"\2190";font-size:1rem}
+.detail-intro{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;margin-bottom:4rem}
+@media(max-width:768px){.detail-intro{grid-template-columns:1fr;gap:2rem}}
+.detail-intro-image{width:100%;aspect-ratio:4/3;object-fit:contain;background:var(--stone)}
+.detail-intro-text h2{font-family:"Playfair Display",serif;font-size:clamp(1.5rem,3vw,2.25rem);font-weight:700;color:var(--deep-brown);margin-bottom:1rem}
+.color-dot{display:inline-block;width:0.75rem;height:0.75rem;border-radius:50%;margin-right:0.5rem;vertical-align:middle}
+.color-dot.white{background:#F0EFEA;border:1px solid #CCC}
+.color-dot.black{background:#1A1A1A}
+.detail-intro-text p{font-size:1rem;line-height:1.8;color:var(--text-soft);margin-bottom:1.5rem}
+.detail-features{display:flex;gap:2rem;flex-wrap:wrap}
+.detail-feature{text-align:center;min-width:5rem}
+.detail-feature-icon{font-size:1.5rem;margin-bottom:0.5rem}
+.detail-feature-label{font-size:0.6875rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--warm-brown)}
+.detail-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+@media(max-width:640px){.detail-gallery{grid-template-columns:1fr}}
+.detail-gallery-item{position:relative;overflow:hidden;aspect-ratio:16/10;background:var(--stone);cursor:pointer;transition:transform 0.45s var(--ease-out-expo)}
+.detail-gallery-item:hover{transform:translateY(-4px)}
+.detail-gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s var(--ease-out-expo)}
+.detail-gallery-item:hover img{transform:scale(1.04)}
+.detail-gallery-item.full-width{grid-column:1/-1;aspect-ratio:21/9}
+.detail-gallery-caption{position:absolute;bottom:0;left:0;right:0;padding:2rem 1.5rem 1rem;background:linear-gradient(to top,rgba(20,8,4,0.7),transparent);color:var(--ivory);font-size:0.8125rem;font-weight:500;letter-spacing:0.05em}
+.lightbox{display:none;position:fixed;inset:0;z-index:9999;background:rgba(20,8,4,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);justify-content:center;align-items:center;padding:2rem;cursor:pointer}
+.lightbox.active{display:flex}
+.lightbox img{max-width:90vw;max-height:85vh;object-fit:contain;box-shadow:0 0 60px rgba(201,169,110,0.15)}
+.lightbox-close{position:absolute;top:1.5rem;right:1.5rem;width:2.5rem;height:2.5rem;border:1px solid rgba(201,169,110,0.4);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--champagne-gold);font-size:1.125rem;cursor:pointer;transition:all 0.3s ease}
+.lightbox-close:hover{background:var(--champagne-gold);color:var(--deep-brown)}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}html{scroll-behavior:auto}}
+
+</style>
+</head>
+<body>
+
+<nav class="nav" id="navbar">
+  <div class="nav-inner">
+    <ul class="nav-links left-links">
+      <li><a href="white.html">HB001 白</a></li>
+      <li><a href="black.html">HB001 黑</a></li>
+    </ul>
+    <a href="index.html" class="nav-logo">HOARBAUR</a>
+    <ul class="nav-links right-links">
+      <li><a href="contact.html">联系方式</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="detail-section white-detail" id="detail-white" style="padding-top:8rem">
+  <div class="container">
+    <a href="index.html" class="detail-back">返回主页</a>
+    <div class="detail-intro reveal">
+      <img src="images/white/02-side.jpg" alt="HB001 白色款" class="detail-intro-image" loading="lazy">
+      <div class="detail-intro-text">
+        <h2>HB001 — 白 <span class="color-dot white"></span></h2>
+        <p>透气网面 / 轻量EVA中底 / 夏季专属配色</p>
+        <p>¥ 4,999</p>
+        <div class="detail-features">
+          <div class="detail-feature"><div class="detail-feature-icon">☁</div><div class="detail-feature-label">超轻透气</div></div>
+          <div class="detail-feature"><div class="detail-feature-icon">🦶</div><div class="detail-feature-label">按摩鞋底</div></div>
+          <div class="detail-feature"><div class="detail-feature-icon">⚡</div><div class="detail-feature-label">能量回弹</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="detail-gallery">
+      <div class="detail-gallery-item full-width reveal reveal-delay-1"><img src="images/white/01-intro.jpg" alt="设计理念" loading="lazy"><div class="detail-gallery-caption">鞋底按摩颗粒科技，呵护足部每一步</div></div>
+      <div class="detail-gallery-item reveal reveal-delay-2"><img src="images/white/03-detail.jpg" alt="正面侧面质感" loading="lazy"><div class="detail-gallery-caption">精致纹理与流线型轮廓</div></div>
+      <div class="detail-gallery-item reveal reveal-delay-3"><img src="images/white/04-feature.jpg" alt="透气孔细节" loading="lazy"><div class="detail-gallery-caption">透气微孔，时刻保持干爽</div></div>
+      <div class="detail-gallery-item full-width reveal reveal-delay-4"><img src="images/white/05-model.jpg" alt="模特穿搭" loading="lazy"><div class="detail-gallery-caption">户外实拍 — 搭配随心，步履轻盈</div></div>
+    </div>
+  </div>
+</section>
+<div class="lightbox" id="lightbox"><div class="lightbox-close">&times;</div><img src="" alt="" id="lightboxImg"></div>
+
+
+<script>
+const navbar=document.getElementById('navbar');
+function updateNav(){navbar.classList.toggle('scrolled',window.scrollY>100)}
+window.addEventListener('scroll',updateNav,{passive:true});updateNav();
+</script>
+
+<script>
+const revealEls=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('revealed');obs.unobserve(e.target)}})},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+revealEls.forEach(el=>obs.observe(el));
+</script>
+
+<script>
+const lightbox=document.getElementById('lightbox'),lightboxImg=document.getElementById('lightboxImg');
+document.querySelectorAll('.detail-gallery-item img').forEach(img=>{img.addEventListener('click',function(e){e.stopPropagation();lightboxImg.src=this.src;lightbox.classList.add('active');document.body.style.overflow='hidden'})});
+function closeLightbox(){lightbox.classList.remove('active');document.body.style.overflow='';lightboxImg.src=''}
+lightbox.addEventListener('click',function(e){if(e.target===lightbox||e.target.classList.contains('lightbox-close'))closeLightbox()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&lightbox.classList.contains('active'))closeLightbox()});
+</script>
+
+</body>
+</html>
