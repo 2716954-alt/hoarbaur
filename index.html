@@ -422,14 +422,15 @@ a {
 .product-card-image {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 16 / 7;
+  aspect-ratio: 1 / 1;
   background: var(--warm-cream);
 }
 
 .product-card-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 1.5rem;
   transition: transform 0.7s var(--ease-out-expo);
 }
 
@@ -1092,7 +1093,12 @@ a {
 <!-- ========== NAVIGATION ========== -->
 <nav class="nav" id="navbar">
   <div class="nav-inner">
+    <ul class="nav-links left-links">
+      <li><a href="#contact">联系方式</a></li>
+    </ul>
     <a href="#" class="nav-logo">HOARBAUR</a>
+    <ul class="nav-links right-links">
+    </ul>
   </div>
 </nav>
 
@@ -1253,6 +1259,19 @@ a {
         <div class="detail-gallery-caption">品牌标识与侧身线条</div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section class="detail-section white-detail" id="contact">
+  <div class="container" style="text-align:center;">
+    <a href="#products" class="detail-back">返回系列</a>
+    <div class="section-header reveal">
+      <p class="section-tag">联系我们</p>
+      <h2 class="section-title">期待您的来电</h2>
+      <span class="section-line"></span>
+    </div>
+    <p style="font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--deep-brown); margin-top:1rem;">17151111122</p>
   </div>
 </section>
 
