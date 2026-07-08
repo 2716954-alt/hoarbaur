@@ -396,10 +396,17 @@ a {
 
 .product-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.5rem;
-  max-width: 800px;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1000px;
   margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
 }
 
 .product-card {
@@ -799,6 +806,64 @@ a {
 }
 
 /* ============================================
+   SOLE TECHNOLOGY SHOWCASE
+   ============================================ */
+.sole-showcase {
+  padding: 5rem 0 6rem;
+  background: var(--deep-brown);
+  color: var(--ivory);
+  text-align: center;
+}
+
+.sole-showcase .section-tag {
+  color: var(--champagne-gold);
+}
+
+.sole-showcase .section-title {
+  color: var(--ivory);
+}
+
+.sole-image {
+  position: relative;
+  max-width: 800px;
+  margin: 3rem auto 0;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.sole-image img {
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  object-fit: cover;
+}
+
+.sole-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  pointer-events: none;
+}
+
+.sole-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  padding: 0.75rem 2rem;
+  border: 1px solid rgba(201, 169, 110, 0.35);
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  color: var(--champagne-gold);
+}
+
+.sole-badge span {
+  font-family: "Playfair Display", serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* ============================================
    DETAIL SECTION
    ============================================ */
 .detail-section {
@@ -1027,12 +1092,7 @@ a {
 <!-- ========== NAVIGATION ========== -->
 <nav class="nav" id="navbar">
   <div class="nav-inner">
-    <ul class="nav-links left-links">
-      <li><a href="#products">新品</a></li>
-    </ul>
     <a href="#" class="nav-logo">HOARBAUR</a>
-    <ul class="nav-links right-links">
-    </ul>
   </div>
 </nav>
 
@@ -1081,6 +1141,23 @@ a {
           <p class="product-card-price">¥ 4,999</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SOLE TECHNOLOGY ========== -->
+<section class="sole-showcase" id="sole">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-tag">核心科技</p>
+      <h2 class="section-title">按摩颗粒鞋底</h2>
+      <span class="section-line"></span>
+    </div>
+    <div class="sole-image reveal reveal-delay-1">
+      <img src="images/white/01-intro.jpg" alt="鞋底按摩颗粒科技" loading="lazy">
+    </div>
+    <div class="sole-badge reveal reveal-delay-2">
+      <span>360°</span> 足底按摩颗粒 · 每一步都是享受
     </div>
   </div>
 </section>
